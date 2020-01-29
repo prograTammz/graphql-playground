@@ -6,31 +6,36 @@ import {GraphQLServer } from 'graphql-yoga';
 //Int
 //Float
 //ID
+// !means the it must return value of same data type not giving a null value
 
 //Type defentions (schema)
 const typeDefs = `
     type Query{
-        hello: String!
+        id: ID!
         name: String!
-        location: String!
-        bio: String!
+        age: Int!
+        employed: Boolean!
+        gpa: Float
     }
 `
 
 //Resolvers
 const resolvers = {
     Query:{
-        hello(){
-            return "Hello world, this is first query!";
+        id(){
+            return 'abc123'
         },
         name(){
-            return "Ahmed Tamer";
+            return "Ahmed Tamer"
         },
-        location(){
-            return "56,Mohammed el mokaled";
+        age(){
+            return 21
         },
-        bio(){
-            return "web dev";
+        employed(){
+            return false
+        },
+        gpa(){
+            return null
         }
     }
 }
