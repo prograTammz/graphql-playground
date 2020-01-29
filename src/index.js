@@ -1,4 +1,7 @@
-import { message } from './myModule';
+
+import addition, {subtract} from './math';
 
 
-console.log(message);
+
+console.log(addition(5,5));
+console.log(subtract(10,5));
