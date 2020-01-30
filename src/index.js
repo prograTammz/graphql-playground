@@ -29,7 +29,7 @@ const users = [{
 //Type defentions (schema)
 const typeDefs = `
     type Query{
-        users: [User!]!
+        users(query: String): [User!]!
         me: User!
         post: Post!
     }
@@ -68,7 +68,13 @@ const resolvers = {
             }
         },
         users(parent,args,ctx,info){
-            return users
+            if(!args.query){
+                return users
+            }
+
+            return users.filter((user)=>{
+                return user.name.toLowerCase().includes(args.query.toLowerCase())
+            })
         }
     }
 }
