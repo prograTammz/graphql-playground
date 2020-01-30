@@ -8,11 +8,28 @@ import {GraphQLServer } from 'graphql-yoga';
 //ID
 // !means the it must return value of same data type not giving a null value
 
+//dummy data
+const users = [{
+    id: '1',
+    name: "Ahmed",
+    email: "ahmed@mail.com"
+    },
+    {
+        id: '2',
+        name: 'Mario',
+        email: "mario@mail.com"
+    },
+    {
+        id: '3',
+        name: 'Hegazy',
+        email: "hegazy@mail.com",
+        age: 22
+    }
+]
 //Type defentions (schema)
 const typeDefs = `
     type Query{
-        greeting(name: String, isNew: Boolean!): String!
-        add(numbers: [Float!]!): Float!
+        users: [User!]!
         me: User!
         post: Post!
     }
@@ -50,18 +67,8 @@ const resolvers = {
                 published: true
             }
         },
-        greeting(parent, args, ctx, info){
-            if(args.isNew){
-                if(args.name != ""){
-                    return `Welcome to our platform, ${args.name}`;
-                }else{
-                    return `Welcome to our platform`
-                }
-            }
-            return "Welcome back !"
-        },
-        add(parent, args, ctx,info){
-           return  args.numbers.reduce((accumulator, currentValue)=>accumulator + currentValue)
+        users(parent,args,ctx,info){
+            return users
         }
     }
 }
