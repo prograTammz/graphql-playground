@@ -11,6 +11,7 @@ import {GraphQLServer } from 'graphql-yoga';
 //Type defentions (schema)
 const typeDefs = `
     type Query{
+        greeting(name: String, isNew: Boolean!): String!
         me: User!
         post: Post!
     }
@@ -47,6 +48,16 @@ const resolvers = {
                 body: "Bla bla bla bla i am the greatest ever",
                 published: true
             }
+        },
+        greeting(parent, args, ctx, info){
+            if(args.isNew){
+                if(args.name != ""){
+                    return `Welcome to our platform, ${args.name}`;
+                }else{
+                    return `Welcome to our platform`
+                }
+            }
+            return "Welcome back !"
         }
     }
 }
