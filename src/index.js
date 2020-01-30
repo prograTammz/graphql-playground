@@ -11,31 +11,27 @@ import {GraphQLServer } from 'graphql-yoga';
 //Type defentions (schema)
 const typeDefs = `
     type Query{
-        title: String!
-        price: Float!
-        releaseYear: Int
-        rating: Float
-        inStock: Boolean!
+        me: User!
+    }
+
+    type User{
+        id: ID!
+        name: String!
+        email: String!
+        age: Int
     }
 `
 
 //Resolvers
 const resolvers = {
     Query:{
-        title(){
-            return "The war of art"
-        },
-        price(){
-            return 12.99
-        },
-        releaseYear(){
-            return 2020
-        },
-        rating(){
-            return null
-        },
-        inStock(){
-            return true
+        me(){
+            return{
+                id: '123abc',
+                name: "Ahmed Tamer",
+                email: "Ahmedtamer@mail.com",
+                age: 22
+            }
         }
     }
 }
