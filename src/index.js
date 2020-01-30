@@ -12,6 +12,7 @@ import {GraphQLServer } from 'graphql-yoga';
 const typeDefs = `
     type Query{
         greeting(name: String, isNew: Boolean!): String!
+        add(numbers: [Float!]!): Float!
         me: User!
         post: Post!
     }
@@ -58,6 +59,9 @@ const resolvers = {
                 }
             }
             return "Welcome back !"
+        },
+        add(parent, args, ctx,info){
+           return  args.numbers.reduce((accumulator, currentValue)=>accumulator + currentValue)
         }
     }
 }
