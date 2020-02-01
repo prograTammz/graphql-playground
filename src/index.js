@@ -51,22 +51,26 @@ const comments = [
     {
         id: '1',
         text: "Worse post ever",
-        author: '1'
+        author: '1',
+        post: '2'
     },
     {
         id:'2',
         text: " Best post ever",
-        author: '1'
+        author: '1',
+        post: '3'
     },
     {
         id: '3',
         text: "Totally agree with you, man",
-        author: '3'
+        author: '3',
+        post : '1'
     },
     {
         id: '4',
         text:"Good point, and thoerically yes, practically NO.",
-        author: '2'
+        author: '2',
+        post: '1'
     }
 ]
 //Type defentions (schema)
@@ -93,11 +97,13 @@ const typeDefs = `
         body: String!
         published: Boolean!
         author: User!
+        comments: [Comment!]!
     }
     type Comment{
         id: ID!
         text: String!
         author: User!
+        post: Post!
     }
 `
 
@@ -162,6 +168,9 @@ const resolvers = {
     Comment:{
         author(parent,args,ctx,info){
             return users.find((user)=>user.id === parent.author)
+        },
+        post(parent,args,ctx,info){
+            return posts.find((post)=>post.id == parent.post)
         }
     }
 }
