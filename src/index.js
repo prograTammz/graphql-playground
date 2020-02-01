@@ -163,9 +163,7 @@ const resolvers = {
                 throw new Error('Email taken.');
             }
             let user = {
-                name: args.name,
-                email: args.email,
-                age: args.age,
+                ...args,
                 id: uuid()
 
             }
@@ -177,10 +175,7 @@ const resolvers = {
             if(!userFound);
             let post = {
                 id: uuid(),
-                title: args.title,
-                body: args.body,
-                author: args.author,
-                published: args.published
+                ...args
             }
             posts.push(post);
             return post;
@@ -193,9 +188,7 @@ const resolvers = {
             }
             let comment = {
                 id: uuid(),
-                text: args.text,
-                author: args.author,
-                post: args.post
+                ...args
             }
             comments.push(comment);
             return comment;
