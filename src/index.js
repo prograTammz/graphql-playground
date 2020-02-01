@@ -47,6 +47,24 @@ const posts = [{
     published: false,
     author: '2'
 }]
+const comments = [
+    {
+        id: '1',
+        text: "Worse post ever"
+    },
+    {
+        id:'2',
+        text: " Best post ever"
+    },
+    {
+        id: '3',
+        text: "Totally agree with you, man"
+    },
+    {
+        id: '4',
+        text:"Good point, and thoerically yes, practically NO."
+    }
+]
 //Type defentions (schema)
 const typeDefs = `
     type Query{
@@ -54,6 +72,7 @@ const typeDefs = `
         posts(query: String): [Post!]!
         me: User!
         post: Post!
+        comments(query:String): [Comment!]!
     }
 
     type User{
@@ -69,6 +88,10 @@ const typeDefs = `
         body: String!
         published: Boolean!
         author: User!
+    }
+    type Comment{
+        id: ID!
+        text: String!
     }
 `
 
@@ -108,6 +131,11 @@ const resolvers = {
             return posts.filter((post)=>{
                 return post.title.toLowerCase().includes(args.query.toLowerCase());
             })
+        },
+        comments(parent,args,ctx,info){
+            if(!args.query){
+                return comments
+            }
         }
     },
     Post: {
