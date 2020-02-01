@@ -155,6 +155,9 @@ const resolvers = {
                 return post.author === parent.id
             })
         },
+        comments(parent,args,ctx,info){
+            return comments.filter((comment)=>comment.author === parent.id)
+        }
     },
     Comment:{
         author(parent,args,ctx,info){
