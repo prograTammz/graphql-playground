@@ -50,19 +50,23 @@ const posts = [{
 const comments = [
     {
         id: '1',
-        text: "Worse post ever"
+        text: "Worse post ever",
+        author: '1'
     },
     {
         id:'2',
-        text: " Best post ever"
+        text: " Best post ever",
+        author: '1'
     },
     {
         id: '3',
-        text: "Totally agree with you, man"
+        text: "Totally agree with you, man",
+        author: '3'
     },
     {
         id: '4',
-        text:"Good point, and thoerically yes, practically NO."
+        text:"Good point, and thoerically yes, practically NO.",
+        author: '2'
     }
 ]
 //Type defentions (schema)
@@ -81,6 +85,7 @@ const typeDefs = `
         email: String!
         age: Int
         posts: [Post!]
+        comments: [ Comment!]!
     }
     type Post{
         id: ID!
@@ -92,6 +97,7 @@ const typeDefs = `
     type Comment{
         id: ID!
         text: String!
+        author: User!
     }
 `
 
@@ -148,6 +154,11 @@ const resolvers = {
             return posts.filter((post)=>{
                 return post.author === parent.id
             })
+        },
+    },
+    Comment:{
+        author(parent,args,ctx,info){
+            return users.find((user)=>user.id === parent.author)
         }
     }
 }
