@@ -83,6 +83,10 @@ const typeDefs = `
         comments(query:String): [Comment!]!
     }
 
+    type Mutation{
+        createUser(name: String!, email: String, age: Int): User!
+    }
+
     type User{
         id: ID!
         name: String!
@@ -148,6 +152,19 @@ const resolvers = {
             if(!args.query){
                 return comments
             }
+        }
+    },
+    Mutation:{
+        createUser(parent,args,ctx,info){
+            let user = {
+                name: args.name,
+                email: args.email,
+                age: args.age,
+                id: users.length + 1
+
+            }
+            users.push(user);
+            return user;
         }
     },
     Post: {
