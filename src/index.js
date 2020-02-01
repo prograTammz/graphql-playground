@@ -1,5 +1,5 @@
 import {GraphQLServer } from 'graphql-yoga';
-
+import uuid from 'uuid/v4';
 //Types
 //String
 //Boolean
@@ -156,11 +156,15 @@ const resolvers = {
     },
     Mutation:{
         createUser(parent,args,ctx,info){
+            const emailTaken = users.some((user)=>user.email == args.emailTaken);
+            if(emailTaken){
+                throw new Error('Email taken.');
+            }
             let user = {
                 name: args.name,
                 email: args.email,
                 age: args.age,
-                id: users.length + 1
+                id: uuid()
 
             }
             users.push(user);
