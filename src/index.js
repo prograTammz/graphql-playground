@@ -9,7 +9,7 @@ import uuid from 'uuid/v4';
 // !means the it must return value of same data type not giving a null value
 
 //dummy data
-const users = [{
+let users = [{
     id: '1',
     name: "Ahmed",
     email: "ahmed@mail.com"
@@ -26,7 +26,7 @@ const users = [{
         age: 22
     }
 ];
-const posts = [{
+let posts = [{
     id: '1',
     title: 'hello',
     body: 'bla bla bla',
@@ -47,7 +47,7 @@ const posts = [{
     published: false,
     author: '2'
 }]
-const comments = [
+let comments = [
     {
         id: '1',
         text: "Worse post ever",
