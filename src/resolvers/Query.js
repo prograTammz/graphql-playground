@@ -1,4 +1,4 @@
-export const Query= {
+const Query = {
     me(){
         return{
             id: '123abc',
@@ -39,3 +39,5 @@ export const Query= {
         }
     }
 }
+
+export {Query as default}

@@ -1,4 +1,4 @@
-export const Mutation = {
+const Mutation = {
     createUser(parent,args,{ db },info){
         const emailTaken = db.users.some((user)=>user.email == args.data.emailTaken);
         if(emailTaken){
@@ -79,3 +79,4 @@ export const Mutation = {
         return deletetedComments[0];
     }
 }
+export {Mutation as default}

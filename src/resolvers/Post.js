@@ -1,4 +1,4 @@
-export const Post ={
+const Post ={
     author(parent, args, { db },info){
         return db.users.find((user)=> user.id == parent.author)
     },
@@ -6,3 +6,5 @@ export const Post ={
         return db.comments.filter((comment)=>comment.post == parent.id)
     }
 }
+
+export {Post as default}
