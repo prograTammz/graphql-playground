@@ -128,6 +128,19 @@ const Mutation = {
         const deletetedComments = db.comments.splice(commentIndex,1);
         
         return deletetedComments[0];
+    },
+    updateComment(parent,args,{db},info){
+        const {id,data} = args;
+        const comment = db.comments.find((comment)=>comment.id == id);
+
+        if(!comment){
+            throw new Error("Sorry comment not found");
+        }
+
+        if(typeof data.text === 'string'){
+            comment.text = data.text;
+        }
+        return comment;
     }
 }
 export {Mutation as default}
