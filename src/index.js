@@ -30,19 +30,22 @@ const posts = [{
     id: '1',
     title: 'hello',
     body: 'bla bla bla',
-    published: true
+    published: true,
+    author: '1'
 },
 {
     id: '2',
     title: 'on your position',
     body: 'bla bla bla',
-    published: true
+    published: true,
+    author: '2'
 },
 {
     id: '3',
     title: 'On my postion',
     body: 'bla bla bla',
-    published: false
+    published: false,
+    author: '2'
 }]
 //Type defentions (schema)
 const typeDefs = `
@@ -58,12 +61,14 @@ const typeDefs = `
         name: String!
         email: String!
         age: Int
+        posts: [Post!]!
     }
     type Post{
         id: ID!
         title: String!
         body: String!
         published: Boolean!
+        author: User!
     }
 `
 
@@ -103,6 +108,11 @@ const resolvers = {
             return posts.filter((post)=>{
                 return post.title.toLowerCase().includes(args.query.toLowerCase());
             })
+        }
+    },
+    Post: {
+        author(parent, args, ctx,info){
+            return users.find((user)=> user.id == parent.author)
         }
     }
 }
