@@ -85,6 +85,7 @@ const typeDefs = `
 
     type Mutation{
         createUser(name: String!, email: String, age: Int): User!
+        createPost(title: String!, body: String!,published: Boolean!, author: ID!): Post!
     }
 
     type User{
@@ -169,6 +170,19 @@ const resolvers = {
             }
             users.push(user);
             return user;
+        },
+        createPost(parents,args,ctx,info){
+            const userFound = users.some((user)=>user.id === args.author);
+            if(!userFound);
+            let post = {
+                id: uuid(),
+                title: args.title,
+                body: args.body,
+                author: args.author,
+                published: args.published
+            }
+            posts.push(post);
+            return post;
         }
     },
     Post: {
