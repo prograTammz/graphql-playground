@@ -7,16 +7,6 @@ import Query from "./resolvers/Query";
 
 //Resolvers
 const resolvers = {
-    User:{
-        posts(parent,args,{ db },info){
-            return db.posts.filter((post)=>{
-                return post.author === parent.id
-            })
-        },
-        comments(parent,args,{ db },info){
-            return db.comments.filter((comment)=>comment.author === parent.id)
-        }
-    },
     Comment:{
         author(parent,args,{ db },info){
             return db.users.find((user)=>user.id === parent.author)
