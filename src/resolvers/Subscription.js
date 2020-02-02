@@ -14,7 +14,7 @@ const Subscription = {
                     throw new Error("Post not found");
                 }
 
-                return pubsub.asyncIterator(`Post: ${postID}`)
+                return pubsub.asyncIterator(`Comment`)
             }
         },
         post: {
